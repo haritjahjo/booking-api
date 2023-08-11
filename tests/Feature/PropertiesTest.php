@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\City;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -14,15 +15,29 @@ class PropertiesTest extends TestCase
     {
         $owner = User::factory()->create()->assignRole(Role::ROLE_OWNER);
         $response = $this->actingAs($owner)->getJson('/api/owner/properties');
- 
+
         $response->assertStatus(200);
     }
- 
+
     public function test_user_does_not_have_access_to_properties_feature()
     {
         $user = User::factory()->create()->assignRole(Role::ROLE_USER);
         $response = $this->actingAs($user)->getJson('/api/owner/properties');
- 
+
         $response->assertStatus(403);
+    }
+
+    public function test_property_owner_can_add_property()
+    {
+        $owner = User::factory()->create(['role_id' => Role::ROLE_OWNER]);
+        $response = $this->actingAs($owner)->postJson('/api/owner/properties', [
+            'name' => 'My property',
+            'city_id' => City::value('id'),
+            'address_street' => 'Street Address 1',
+            'address_postcode' => '12345',
+        ]);
+
+        $response->assertSuccessful();
+        $response->assertJsonFragment(['name' => 'My property']);
     }
 }

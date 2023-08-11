@@ -23,10 +23,18 @@ use App\Http\Controllers\Owner\PropertyController;
 
 Route::post('auth/register', RegisterController::class);
 
-Route::middleware('auth:sanctum')->group(function() {
+Route::middleware('auth:sanctum')->group(function () {
     // No owner/user grouping, for now, will do it later with more routes
-    Route::get('owner/properties',
-        [PropertyController::class, 'index']);
-    Route::get('user/bookings',
-        [BookingController::class, 'index']);
+    Route::get(
+        'owner/properties',
+        [PropertyController::class, 'index']
+    );
+    Route::get(
+        'user/bookings',
+        [BookingController::class, 'index']
+    );
+    Route::post(
+        'owner/properties',
+        [PropertyController::class, 'store']
+    );
 });
