@@ -14,8 +14,8 @@ class AuthTest extends TestCase
     public function test_registration_fails_with_admin_role()
     {
         $response = $this->postJson('/api/auth/register', [
-            'name' => 'Valid name',
-            'email' => 'valid@email.com',
+            'name' => 'Valid Admin',
+            'email' => 'valid.admin@example.com',
             'password' => 'ValidPassword',
             'password_confirmation' => 'ValidPassword',
             'role_id' => Role::ROLE_ADMINISTRATOR
@@ -27,8 +27,8 @@ class AuthTest extends TestCase
     public function test_registration_succeeds_with_owner_role()
     {
         $response = $this->postJson('/api/auth/register', [
-            'name' => 'Valid name',
-            'email' => 'valid@email.com',
+            'name' => 'Valid Owner',
+            'email' => 'valid.owner@example.com',
             'password' => 'ValidPassword',
             'password_confirmation' => 'ValidPassword',
             'role_id' => Role::ROLE_OWNER
@@ -42,8 +42,8 @@ class AuthTest extends TestCase
     public function test_registration_succeeds_with_user_role()
     {
         $response = $this->postJson('/api/auth/register', [
-            'name' => 'Valid name',
-            'email' => 'valid@email.com',
+            'name' => 'Valid User',
+            'email' => 'valid.user@example.com',
             'password' => 'ValidPassword',
             'password_confirmation' => 'ValidPassword',
             'role_id' => Role::ROLE_USER

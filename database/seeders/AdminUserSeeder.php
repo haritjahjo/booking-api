@@ -18,8 +18,7 @@ class AdminUserSeeder extends Seeder
             'email' => 'superadmin@booking.com',
             'password' => bcrypt('password'),
             'email_verified_at' => now(),
+            'role_id' => 1, // Administrator
         ]);
-
-        $user->assignRole('Administrator');
     }
 }

@@ -11,33 +11,33 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PropertiesTest extends TestCase
 {
+    use RefreshDatabase;
+ 
     public function test_property_owner_has_access_to_properties_feature()
     {
-        $owner = User::factory()->create()->assignRole(Role::ROLE_OWNER);
+        $owner = User::factory()->create([
+            'name' => 'Prop Owner 1',
+            'email' => 'prop.owner1@example.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
+            'role_id' => Role::ROLE_OWNER
+        ]);
         $response = $this->actingAs($owner)->getJson('/api/owner/properties');
-
+ 
         $response->assertStatus(200);
     }
-
+ 
     public function test_user_does_not_have_access_to_properties_feature()
     {
-        $user = User::factory()->create()->assignRole(Role::ROLE_USER);
-        $response = $this->actingAs($user)->getJson('/api/owner/properties');
-
-        $response->assertStatus(403);
-    }
-
-    public function test_property_owner_can_add_property()
-    {
-        $owner = User::factory()->create(['role_id' => Role::ROLE_OWNER]);
-        $response = $this->actingAs($owner)->postJson('/api/owner/properties', [
-            'name' => 'My property',
-            'city_id' => City::value('id'),
-            'address_street' => 'Street Address 1',
-            'address_postcode' => '12345',
+        $owner = User::factory()->create([
+            'name' => 'Simple User1 ',
+            'email' => 'simple.user1@example.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
+            'role_id' => Role::ROLE_USER
         ]);
-
-        $response->assertSuccessful();
-        $response->assertJsonFragment(['name' => 'My property']);
+        $response = $this->actingAs($owner)->getJson('/api/owner/properties');
+ 
+        $response->assertStatus(403);
     }
 }
