@@ -7,7 +7,9 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\CitySeeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\CountrySeeder;
+use Database\Seeders\PropertySeeder;
 use Database\Seeders\AdminUserSeeder;
+use Database\Seeders\ApartmentSeeder;
 use Database\Seeders\GeoobjectSeeder;
 use Database\Seeders\PermissionSeeder;
 
@@ -31,5 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CountrySeeder::class);
         $this->call(CitySeeder::class);
         $this->call(GeoobjectSeeder::class);
+
+        $this->call(PropertySeeder::class);
+        $this->call(ApartmentSeeder::class);
     }
 }
