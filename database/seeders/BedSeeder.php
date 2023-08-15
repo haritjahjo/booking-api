@@ -14,5 +14,6 @@ class BedSeeder extends Seeder
     public function run(): void
     {
         Bed::factory(5)->create();
+        
     }
 }

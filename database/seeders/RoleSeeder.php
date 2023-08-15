@@ -17,4 +17,5 @@ class RoleSeeder extends Seeder
         Role::create(['name' => 'Property Owner']);
         Role::create(['name' => 'Simple User']);
     }
+    
 }

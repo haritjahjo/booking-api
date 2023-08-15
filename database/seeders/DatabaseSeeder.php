@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\BedSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CitySeeder;
 use Database\Seeders\RoleSeeder;
+use Database\Seeders\RoomSeeder;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\PropertySeeder;
 use Database\Seeders\AdminUserSeeder;

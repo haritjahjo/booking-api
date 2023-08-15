@@ -19,8 +19,7 @@ class RoomFactory extends Factory
         return [
             'apartment_id' => rand(1, 20),
             'room_type_id' => rand(1,2),
-            'name' => fake()->words(3, true),
-            
+            'name' => fake()->words(3, true),            
         ];
     }
 }

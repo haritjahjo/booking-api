@@ -27,4 +27,5 @@ class GeoobjectSeeder extends Seeder
             'long' => -0.124625
         ]);
     }
+    
 }

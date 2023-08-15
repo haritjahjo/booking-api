@@ -27,5 +27,6 @@ class PermissionSeeder extends Seeder
                 $allRoles[$role]->permissions()->attach($permission->id);
             }
         }
+        
     }
 }

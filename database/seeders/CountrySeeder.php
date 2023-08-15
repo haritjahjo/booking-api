@@ -23,5 +23,6 @@ class CountrySeeder extends Seeder
             'lat' => 55.378051,
             'long' => -3.435973
         ]);
+        
     }
 }

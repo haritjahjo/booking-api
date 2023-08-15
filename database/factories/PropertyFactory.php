@@ -27,6 +27,7 @@ class PropertyFactory extends Factory
             'address_postcode' => fake()->postcode(),
             'lat' => fake()->latitude(),
             'long' => fake()->longitude(),
+            
         ];
     }
 }

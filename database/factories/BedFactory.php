@@ -20,6 +20,7 @@ class BedFactory extends Factory
             'room_id' => rand(1,5),
             'bed_type_id' => rand(1,4),
             'name' => fake()->words(2, true),
+            
         ];
     }
 }

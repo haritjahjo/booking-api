@@ -24,7 +24,7 @@ class ApartmentFactory extends Factory
             'capacity_adults' => rand(1, 5),
             'capacity_children' => rand(1, 5),
             'size' =>fake()->boolean(50) ? fake()->numberBetween(20, 300) : null,
-            'bathrooms' => rand(0, 5)
+            'bathrooms' => rand(0, 5),
         ];
     }
 }

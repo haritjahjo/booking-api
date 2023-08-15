@@ -26,5 +26,6 @@ class CitySeeder extends Seeder
             'lat' => 51.507351,
             'long' => -0.127758,
         ]);
+        
     }
 }
