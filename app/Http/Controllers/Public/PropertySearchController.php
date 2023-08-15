@@ -6,12 +6,14 @@ use App\Models\Property;
 use App\Models\Geoobject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PropertySearchResource;
 
 class PropertySearchController extends Controller
 {
     public function __invoke(Request $request)
     {
-        return Property::query()
+        // return Property::query()
+         $properties = Property::query()
             ->with([
                 'city',
                 'apartments.apartment_type',
@@ -45,5 +47,8 @@ class PropertySearchController extends Controller
                 });
             })
             ->get();
+
+            return PropertySearchResource::collection($properties);
+
     }
 }
