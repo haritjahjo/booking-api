@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('auth/register', \App\Http\Controllers\Auth\RegisterController::class);
 
+Route::post('/login', [\App\Http\Controllers\Auth\RegisterController::class, 'login']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('owner')->group(function () {
 
@@ -41,6 +43,8 @@ Route::middleware('auth:sanctum')->group(function () {
             [\App\Http\Controllers\User\BookingController::class, 'index']
         );
     });
+
+    Route::post('/logout', [\App\Http\Controllers\Auth\RegisterController::class, 'logout']);
 });
 
 Route::get('search',

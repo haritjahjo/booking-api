@@ -13,7 +13,7 @@ class BedSeeder extends Seeder
      */
     public function run(): void
     {
-        Bed::factory(200)->create();
+        Bed::factory(10)->create();
         
     }
 }

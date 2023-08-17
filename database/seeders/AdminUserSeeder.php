@@ -27,16 +27,16 @@ class AdminUserSeeder extends Seeder
             'email' => 'nadya.owner@example.com',
             'password' => bcrypt('password'),
             'email_verified_at' => now(),
-            'role_id' => Role::ROLE_OWNER, // Administrator
+            'role_id' => Role::ROLE_OWNER, // Owner
         ]);
 
-        User::create([
-            'name' => 'Rizki User',
-            'email' => 'rizki.user@example.com',
-            'password' => bcrypt('password'),
-            'email_verified_at' => now(),
-            'role_id' => Role::ROLE_USER, // Administrator
+        // User::create([
+        //     'name' => 'Rizki User',
+        //     'email' => 'rizki.user@example.com',
+        //     'password' => bcrypt('password'),
+        //     'email_verified_at' => now(),
+        //     'role_id' => Role::ROLE_USER, // Simply User
             
-        ]);
+        // ]);
     }
 }
