@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Bed;
 use App\Models\Room;
+use App\Models\Facility;
 use App\Models\Property;
 use App\Models\ApartmentType;
 use Illuminate\Database\Eloquent\Model;
@@ -63,5 +64,10 @@ class Apartment extends Model
         return new Attribute(
             get: fn () => $bedsList
         );
+    }
+
+    public function facilities()
+    {
+        return $this->belongsToMany(Facility::class);
     }
 }

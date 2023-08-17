@@ -2,10 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\User\BookingController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Owner\PropertyController;
-use App\Http\Controllers\Public\PropertySearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +18,7 @@ use App\Http\Controllers\Public\PropertySearchController;
 //     return $request->user();
 // });
 
-Route::post('auth/register', RegisterController::class);
+Route::post('auth/register', \App\Http\Controllers\Auth\RegisterController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('owner')->group(function () {
@@ -30,22 +26,25 @@ Route::middleware('auth:sanctum')->group(function () {
         // No owner/user grouping, for now, will do it later with more routes
         Route::get(
             'properties',
-            [PropertyController::class, 'index']
+            [\App\Http\Controllers\Owner\PropertyController::class, 'index']
         );
         
         Route::post(
             'properties',
-            [PropertyController::class, 'store']
+            [\App\Http\Controllers\Owner\PropertyController::class, 'store']
         );
     });
 
     Route::prefix('user')->group(function () {
         Route::get(
             'bookings',
-            [BookingController::class, 'index']
+            [\App\Http\Controllers\User\BookingController::class, 'index']
         );
     });
 });
 
 Route::get('search',
-    PropertySearchController::class);
+    \App\Http\Controllers\Public\PropertySearchController::class);
+
+Route::get('properties/{property}',
+    \App\Http\Controllers\Public\PropertyController::class);
