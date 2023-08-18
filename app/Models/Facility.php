@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Property;
 use App\Models\FacilityCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,4 +23,8 @@ class Facility extends Model
         return $this->belongsToMany(Apartment::class);
     }
 
+    public function properties()
+    {
+        return $this->belongsToMany(Property::class);
+    }
 }
