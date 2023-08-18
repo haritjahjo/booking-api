@@ -13,7 +13,7 @@ class PropertyController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Property $property, Request $request): Response
+    public function __invoke(Property $property, Request $request)
     {
         $property->load('apartments.facilities');
         
