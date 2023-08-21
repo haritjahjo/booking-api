@@ -22,13 +22,13 @@ class AdminUserSeeder extends Seeder
             'role_id' => Role::ROLE_ADMINISTRATOR, // Administrator
         ]);
 
-        User::create([
-            'name' => 'Nadya Owner',
-            'email' => 'nadya.owner@example.com',
-            'password' => bcrypt('password'),
-            'email_verified_at' => now(),
-            'role_id' => Role::ROLE_OWNER, // Owner
-        ]);
+        // User::create([
+        //     'name' => 'Nadya Owner',
+        //     'email' => 'nadya.owner@example.com',
+        //     'password' => bcrypt('password'),
+        //     'email_verified_at' => now(),
+        //     'role_id' => Role::ROLE_OWNER, // Owner
+        // ]);
 
         // User::create([
         //     'name' => 'Rizki User',

@@ -18,7 +18,15 @@ class PropertySearchController extends Controller
             ->with([
                 'city',
                 'apartments.apartment_type',
-                'apartments.rooms.beds.bed_type'
+                'apartments.rooms.beds.bed_type',
+                'apartments.prices' => function ($query) use ($request) {
+                    $query->validForRange([
+                        $request->start_date ?? now()->addDay()->toDateString(),
+                        $request->end_date ?? now()->addDays(2)->toDateString(),
+                    ]);
+                },
+                // We add only this eager loading by position here
+                'media' => fn ($query) => $query->orderBy('position'),
             ])
             // conditions will come here
             ->when($request->city, function ($query) use ($request) {
@@ -61,8 +69,18 @@ class PropertySearchController extends Controller
                     $query->whereIn('facilities.id', $request->facilities);
                 });
             })
+            ->when($request->price_from, function ($query) use ($request) {
+                $query->whereHas('apartments.prices', function ($query) use ($request) {
+                    $query->where('price', '>=', $request->price_from);
+                });
+            })
+            ->when($request->price_to, function ($query) use ($request) {
+                $query->whereHas('apartments.prices', function ($query) use ($request) {
+                    $query->where('price', '<=', $request->price_to);
+                });
+            })
             ->get();
-        
+
 
         $facilities = Facility::query()
             ->withCount(['properties' => function ($property) use ($properties) {

@@ -5,16 +5,20 @@ namespace App\Models;
 use App\Models\City;
 use App\Models\Facility;
 use App\Models\Apartment;
+use Spatie\MediaLibrary\HasMedia;
 use App\Observers\PropertyObserver;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Property extends Model
+class Property extends Model implements HasMedia
 {
     use HasFactory;
     use HasEagerLimit;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'owner_id',
@@ -55,5 +59,11 @@ class Property extends Model
     public function facilities()
     {
         return $this->belongsToMany(Facility::class);
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumbnail')
+            ->width(800);
     }
 }
