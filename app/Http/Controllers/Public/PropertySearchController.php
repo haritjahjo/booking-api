@@ -28,6 +28,7 @@ class PropertySearchController extends Controller
                 // We add only this eager loading by position here
                 'media' => fn ($query) => $query->orderBy('position'),
             ])
+            ->withAvg('bookings', 'rating')
             // conditions will come here
             ->when($request->city, function ($query) use ($request) {
                 $query->where('city_id', $request->city);
@@ -79,6 +80,7 @@ class PropertySearchController extends Controller
                     $query->where('price', '<=', $request->price_to);
                 });
             })
+            ->orderBy('bookings_avg_rating', 'desc')
             ->get();
 
 

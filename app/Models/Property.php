@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\City;
+use App\Models\Booking;
 use App\Models\Facility;
 use App\Models\Apartment;
 use Spatie\MediaLibrary\HasMedia;
@@ -51,8 +52,8 @@ class Property extends Model implements HasMedia
     {
         return new Attribute(
             get: fn () => $this->address_street
-                 . ', ' . $this->address_postcode
-                 . ', ' . $this->city->name
+                . ', ' . $this->address_postcode
+                . ', ' . $this->city->name
         );
     }
 
@@ -65,5 +66,10 @@ class Property extends Model implements HasMedia
     {
         $this->addMediaConversion('thumbnail')
             ->width(800);
+    }
+
+    public function bookings()
+    {
+        return $this->hasManyThrough(Booking::class, Apartment::class);
     }
 }
