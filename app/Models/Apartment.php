@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use App\Models\Bed;
 use App\Models\Room;
+use App\Models\Booking;
 use App\Models\Facility;
 use App\Models\Property;
 use App\Models\ApartmentType;
@@ -19,7 +20,7 @@ class Apartment extends Model
     use HasFactory;
     use HasEagerLimit;
 
-        protected $fillable = [
+    protected $fillable = [
         'property_id',
         'apartment_type_id',
         'name',
@@ -28,7 +29,7 @@ class Apartment extends Model
         'size',
         'bathrooms',
     ];
- 
+
     public function property()
     {
         return $this->belongsTo(Property::class);
@@ -48,7 +49,7 @@ class Apartment extends Model
     {
         return $this->hasManyThrough(Bed::class, Room::class);
     }
- 
+
     public function bedsList(): Attribute
     {
         $allBeds = $this->beds;
@@ -62,9 +63,9 @@ class Apartment extends Model
             foreach ($bedsByType as $bedType => $beds) {
                 $bedsListArray[] = $beds->count() . ' ' . str($bedType)->plural($beds->count());
             }
-            $bedsList .= ' ('.implode(', ' , $bedsListArray) .')';
+            $bedsList .= ' (' . implode(', ', $bedsListArray) . ')';
         }
- 
+
         return new Attribute(
             get: fn () => $bedsList
         );
@@ -79,7 +80,7 @@ class Apartment extends Model
     {
         return $this->hasMany(ApartmentPrice::class);
     }
- 
+
     public function calculatePriceForDates($startDate, $endDate)
     {
         // Convert to Carbon if not already
@@ -89,16 +90,21 @@ class Apartment extends Model
         if (!$endDate instanceof Carbon) {
             $endDate = Carbon::parse($endDate)->endOfDay();
         }
- 
+
         $cost = 0;
- 
+
         while ($startDate->lte($endDate)) {
             $cost += $this->prices->where(function (ApartmentPrice $price) use ($startDate) {
                 return $price->start_date->lte($startDate) && $price->end_date->gte($startDate);
             })->value('price');
             $startDate->addDay();
         }
- 
+
         return $cost;
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
     }
 }
