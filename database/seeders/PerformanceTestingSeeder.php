@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\Performance;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
+use Laravel\Telescope\Telescope;
+use Database\Seeders\Performance;
 use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\PermissionSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,6 +17,9 @@ class PerformanceTestingSeeder extends Seeder
      */
     public function run(): void
     {
+
+        Telescope::stopRecording();
+
         $this->call([
             RoleSeeder::class,
             AdminUserSeeder::class,

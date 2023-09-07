@@ -18,7 +18,8 @@ class PropertySearchController extends Controller
                 'city',
                 'apartments.apartment_type',
                 'apartments.beds',
-                'apartments.rooms.beds.bed_type',
+                // 'apartments.rooms.beds.bed_type',
+                'apartments.beds.bed_type',
                 'apartments.prices' => function ($query) use ($request) {
                     $query->validForRange([
                         $request->start_date ?? now()->addDay()->toDateString(),
