@@ -17,7 +17,12 @@ class EditApartment extends EditRecord
         ];
     }
 
-    public function hasCombinedRelationManagerTabsWithForm(): bool 
+    // public function hasCombinedRelationManagerTabsWithForm(): bool 
+    // {
+    //     return true;
+    // }
+
+    public function hasCombinedRelationManagerTabsWithContent(): bool
     {
         return true;
     }
